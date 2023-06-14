@@ -20,10 +20,6 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
     setIsShowRoom(!isShowRoom);
   };
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   if (!router.isFallback && !artwork?.slug) {
     return <h1>404 - Page Not Found</h1>;
   }

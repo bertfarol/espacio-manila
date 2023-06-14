@@ -1,9 +1,7 @@
 import SinglePage from "@/components/ExhibitionPage/SinglePage";
-import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { Exhibit } from "@/types/exhibit";
-import { fetchExhibitions } from "@/utils/api";
-
+import { fetchExhibitions, getExhibitionBySlug } from "@/utils/api";
 
 type ExhibitProps = {
   exhibit: Exhibit;
@@ -11,50 +9,63 @@ type ExhibitProps = {
 
 export default function ExhibitionDetails({ exhibit }: ExhibitProps) {
   const router = useRouter();
-   
-  if (router.isFallback) {
-    return <div>Loading...</div>;
+
+  if (!router.isFallback && !exhibit?.slug) {
+    return <h1>404 - Page Not Found</h1>;
   }
 
-  return (
-      <SinglePage data={exhibit} />
-  );
+   return (
+     <>
+       {router.isFallback ? (
+         <p>Loading...</p>
+       ) : (
+         <SinglePage data={exhibit} />
+       )}
+     </>
+   );
+
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {  
-  const response = await fetchExhibitions();
-  const exhibitions: Exhibit[] = await response;
-
-  const paths = exhibitions.map((exhibit) => ({
-    params: { slug: exhibit.slug },
-  }));
-
-  return {
-    paths,
-    fallback: true, 
+type Params = {
+  params: {
+    slug: string;
   };
 };
 
-export const getStaticProps: GetStaticProps<ExhibitProps> = async ({
-  params,
-}) => {
-  const { slug } = params ?? {}; 
+export const getStaticProps = async ({ params }: Params) => {
+  if (!params.slug) return { notFound: true };
 
-  if (!slug) {
-    return {
-      notFound: true, 
-    };
-  }
- 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/exhibitions/${slug}`
-  );
-  const exhibit: Exhibit = await response.json();
-     
+  const exhibition = await getExhibitionBySlug(params.slug);
+
   return {
     props: {
-      exhibit,
+      exhibit: exhibition,
     },
-    revalidate: 1, 
+    revalidate: 1,
   };
+};
+
+export const getStaticPaths = async () => {
+  try {
+    const exhibitions = await fetchExhibitions();
+
+    return {
+      paths: exhibitions.map((exhibition: { slug: string }) => ({
+        params: {
+          slug: exhibition.slug,
+        },
+      })),
+      fallback: false,
+    };
+  } catch (error) {
+    console.error(
+      "[pages/exhibitions/[slug] - getStaticPaths()]Error fetching exhibitions:",
+      error
+    );
+
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 };
