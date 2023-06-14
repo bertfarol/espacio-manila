@@ -6,7 +6,7 @@ export async function fetchArtworks() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching artworks:", error);
+    console.error("[utisl/api - fetchArtworks] Error fetching artworks:", error);
     return [];
   }
 }
@@ -19,7 +19,10 @@ export async function fetchArtworksArtists() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching artworks:", error);
+    console.error(
+      "[utisl/api - fetchArtworksArtists] Error fetching artists:",
+      error
+    );
     return [];
   }
 }
@@ -27,12 +30,18 @@ export async function fetchArtworksArtists() {
 export async function getArtworkBySlug(slug: string) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/artworks/${slug}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/artworks`
     );
     const data = await response.json();
-    return data;
+
+    const filteredArtwork = data.find((artwork: { slug: string; }) => artwork.slug === slug);
+
+    return filteredArtwork;
   } catch (error) {
-    console.error("Error fetching artworks:", error);
+    console.error(
+      "[utisl/api - getArtworkBySlug] Error fetching artwork:",
+      error
+    );
     return [];
   }
 }
@@ -45,7 +54,10 @@ export async function fetchExhibitions() {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching exhibitions:", error);
+    console.error(
+      "[utisl/api - fetchExhibitions] Error fetching exhibitions:",
+      error
+    );
     return [];
   }
 }
