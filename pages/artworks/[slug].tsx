@@ -33,12 +33,13 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
       {router.isFallback ? (
         <p>Loading...</p>
       ) : (
-        <LightBox
-          data={artwork}
-          handleViewRoom={handleViewRoom}
-          handleGoBack={handleGoBack}
-          isShowRoom={isShowRoom}
-        />
+          <p>nice loaded</p>
+        //   <LightBox
+        //   data={artwork}
+        //   handleViewRoom={handleViewRoom}
+        //   handleGoBack={handleGoBack}
+        //   isShowRoom={isShowRoom}
+        // />
       )}
     </>
   );
