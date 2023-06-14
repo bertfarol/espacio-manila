@@ -48,7 +48,7 @@ html {
 }
 
 .room-wrapper {
-  @apply absolute top-0 left-0 z-30 flex items-center justify-center w-full h-full overflow-hidden bg-white;
+  @apply fixed top-0 left-0 flex items-center justify-center w-full h-full overflow-hidden bg-white;
 }
 
 .room {

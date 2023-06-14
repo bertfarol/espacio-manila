@@ -22,6 +22,8 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
   const FURNITURE_ORIGINAL_WIDTH = 228.6; // cm
   const INCH_TO_CM = 2.54;
 
+
+
   useEffect(() => {
     const resizeSofa = () => {
       const sofa = document.querySelector(".furniture-sofa") as HTMLElement;
@@ -63,6 +65,7 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
         painting.style.bottom = `${bottom}%`;
         painting.style.width = `${artworkNewWidth}px`;
       }
+
     };
 
     setSofaWidth(window.innerWidth <= 750 ? window.innerWidth * 0.75 : 550);
@@ -74,35 +77,33 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
   }, []);
 
   return (
-    <div className={`${showRoom ? "block" : "hidden"}`}>
-      <div className="room-wrapper animate-room">
-        <div className="room">
-          <div className="wall">
-            <div className="wall-inner-wrap">
+    <div
+      className={`${showRoom ? "z-30" : "z-[-1]"} room-wrapper animate-room`}
+    >
+      <div className="room">
+        <div className="wall">
+          <div className="wall-inner-wrap">
+            <Image
+              className="painting add-shadow"
+              src={`/${artworkImage}`}
+              alt="Espacio Manila - Painting"
+              style={{ width: "100%" }}
+              width={imageWidth}
+              height={imageHeight}
+            />
+
+            <div className="furniture-sofa" style={{ width: `${sofaWidth}px` }}>
               <Image
-                className="painting add-shadow"
-                src={`/${artworkImage}`}
-                alt="Espacio Manila - Painting"
+                src="/brown-sofa.png"
+                alt=""
                 style={{ width: "100%" }}
-                width={imageWidth}
-                height={imageHeight}
+                width={837}
+                height={324}
               />
-              <div
-                className="furniture-sofa"
-                style={{ width: `${sofaWidth}px` }}
-              >
-                <Image
-                  src="/brown-sofa.png"
-                  alt=""
-                  style={{ width: "100%" }}
-                  width={837}
-                  height={324}
-                />
-              </div>
             </div>
           </div>
-          <div className="floor"></div>
         </div>
+        <div className="floor"></div>
       </div>
     </div>
   );
