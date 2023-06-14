@@ -39,10 +39,10 @@ const FilterModal = ({
         document.body.classList.remove("bg-overlay");
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [handleMenuClick]);
+  }, [handleMenuClick, onClose]);
 
   return (
     <div className={modalClass} ref={modalRef}>

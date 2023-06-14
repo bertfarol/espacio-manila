@@ -13,21 +13,29 @@ type SinglePageProps = {
 };
 
 export default function SinglePage({ data }: SinglePageProps) {
-  const { name, start_date, end_date, location, artist, image: [{ url, width, height }], slug } = data;
+  const {
+    name,
+    start_date,
+    end_date,
+    location,
+    artist,
+    image: [{ url, width, height }],
+    slug,
+  } = data;
 
   const [artworksData, setArtworksData] = useState<Artworks[]>([]);
-  
-  const fetchArtworkData = async () => {
-    const artworks = await fetchArtworks();
-    const filteredByExhitbion = artworks.filter((artwork: Artworks) => {
-      return artwork.exhibition === slug;
-    });
-    setArtworksData(filteredByExhitbion);
-  }
 
   useEffect(() => {
+    const fetchArtworkData = async () => {
+      const artworks = await fetchArtworks();
+      const filteredByExhitbion = artworks.filter((artwork: Artworks) => {
+        return artwork.exhibition === slug;
+      });
+      setArtworksData(filteredByExhitbion);
+    };
+
     fetchArtworkData();
-  }, [fetchArtworkData]);
+  }, []);
 
   return (
     <>
@@ -61,12 +69,7 @@ export default function SinglePage({ data }: SinglePageProps) {
                   <div className="grid grid-cols-tableCol grid-rows-tableRow gap-2.5">
                     <div className="font-medium grid-item">Date:</div>
                     <div className="grid-item text-grayText">
-                      {
-                        <DateFormat
-                          startDate={start_date}
-                          endDate={end_date}
-                        />
-                      }
+                      {<DateFormat startDate={start_date} endDate={end_date} />}
                     </div>
                     <div className="font-medium grid-item">Location:</div>
                     <div className="grid-item text-grayText">{location}</div>
@@ -83,13 +86,17 @@ export default function SinglePage({ data }: SinglePageProps) {
                 Selected Artworks
               </h2>
             </div>
-            <ArtworksList artworks={artworksData} showAll={true} artist="all" category="all"/>
+            <ArtworksList
+              artworks={artworksData}
+              showAll={true}
+              artist="all"
+              category="all"
+            />
           </div>
         </div>
       </Layout>
     </>
   );
 }
-
 
 // xl: items - end;

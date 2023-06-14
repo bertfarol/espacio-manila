@@ -19,6 +19,8 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
   imageWidth,
 }) => {
   const [sofaWidth, setSofaWidth] = useState<number>(0);
+  const FURNITURE_ORIGINAL_WIDTH = 228.6; // cm
+  const INCH_TO_CM = 2.54;
 
   useEffect(() => {
     const resizeSofa = () => {
@@ -36,6 +38,33 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
       artworkResize(sofaWidth.toString());
     };
 
+    const artworkResize = (furnitureWidth: string) => {
+      const painting = document.querySelector(".painting") as HTMLElement;
+
+      const parsedFurnitureWidth = parseInt(furnitureWidth, 10);
+      let sofaPercentage = parsedFurnitureWidth * 0.7;
+      let artworkSize = parsedFurnitureWidth / FURNITURE_ORIGINAL_WIDTH;
+      let artworkInchesWidth = imgWidthInches * INCH_TO_CM;
+      let artworkNewWidth = artworkInchesWidth * artworkSize;
+      let bottom = artworkNewWidth > sofaPercentage ? 30 : 35;
+
+      if (window.innerWidth <= 500) {
+        bottom = 20;
+        if (imgHeightInches > 40) {
+          bottom -= 5;
+        }
+      } else {
+        if (imgHeightInches > 40) {
+          bottom -= 14;
+        }
+      }
+
+      if (painting) {
+        painting.style.bottom = `${bottom}%`;
+        painting.style.width = `${artworkNewWidth}px`;
+      }
+    };
+
     setSofaWidth(window.innerWidth <= 750 ? window.innerWidth * 0.75 : 550);
     resizeSofa();
     window.addEventListener("resize", resizeSofa);
@@ -43,36 +72,6 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
       window.removeEventListener("resize", resizeSofa);
     };
   }, []);
-
-  const FURNITURE_ORIGINAL_WIDTH = 228.6; // cm
-  const INCH_TO_CM = 2.54;
-
-  const artworkResize = (furnitureWidth: string) => {
-    const painting = document.querySelector(".painting") as HTMLElement;
-
-    const parsedFurnitureWidth = parseInt(furnitureWidth, 10);
-    let sofaPercentage = parsedFurnitureWidth * 0.7;
-    let artworkSize = parsedFurnitureWidth / FURNITURE_ORIGINAL_WIDTH;
-    let artworkInchesWidth = imgWidthInches * INCH_TO_CM;
-    let artworkNewWidth = artworkInchesWidth * artworkSize;
-    let bottom = artworkNewWidth > sofaPercentage ? 30 : 35;
-
-    if (window.innerWidth <= 500) {
-      bottom = 20;
-      if (imgHeightInches > 40) {
-        bottom -= 5;
-      }
-    } else {
-      if (imgHeightInches > 40) {
-        bottom -= 14;
-      }
-    }
-
-    if (painting) {
-      painting.style.bottom = `${bottom}%`;
-      painting.style.width = `${artworkNewWidth}px`;
-    }
-  };
 
   return (
     <div className={`${showRoom ? "block" : "hidden"}`}>
