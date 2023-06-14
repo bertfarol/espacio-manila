@@ -1,7 +1,7 @@
 import { Artworks } from "@/types/artworks";
 import Image from "next/image";
 import Link from "next/link";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface ArtworksProps {
   artworks: Artworks[];
@@ -18,14 +18,20 @@ export default function ArtworksList({
   artist,
   setArtworkCount,
 }: ArtworksProps) {
+  const [showShadow, setShowShadow] = useState(false);
+
+  const handleImageLoad = () => {
+      setTimeout(() => {
+        setShowShadow(true);
+      }, 500); 
+  };
+
   const filteredArtworks = artworks.filter((art) => {
     const artistCondition = artist === "all" || art.artist === artist; // if 'artist === all' then it's 'true' it will display the entire artworks
     const categoryCondition = category === "all" || art.category === category; // if 'category === all' then it's 'true' it will display the entire artworks
 
     return artistCondition && categoryCondition;
   });
-
- 
 
   const artworksList = showAll ? filteredArtworks : artworks.slice(0, 4);
 
@@ -47,7 +53,8 @@ export default function ArtworksList({
               alt={art.title}
               width={art.image.width}
               height={art.image.height}
-              className="object-contain object-bottom h-full art-shadow-sm"
+              className={`object-contain object-bottom h-full duration-300 ${showShadow ? "art-shadow-sm" : ""}`}
+              onLoad={handleImageLoad}
             />
             <div className="group-hover:flex hidden tracking-wider items-center justify-center text-sm text-white bg-black/80 rounded-full h-14 w-14 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               View

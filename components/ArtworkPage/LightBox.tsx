@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
@@ -19,6 +19,13 @@ const LightBox = ({
   handleGoBack,
   isShowRoom,
 }: LightBoxProps) => {
+    const [showShadow, setShowShadow] = useState(false);
+
+    const handleImageLoad = () => {
+      setTimeout(() => {
+        setShowShadow(true);
+      }, 500);
+    };
   
   const {
     title,
@@ -50,8 +57,11 @@ const LightBox = ({
                     alt={title}
                     width={imageWidth}
                     height={imageHeight}
-                    className="relative z-10 object-contain object-bottom h-full art-shadow"
+                    className={`relative z-10 object-contain object-bottom h-full duration-300 ${
+                      showShadow ? "art-shadow" : ""
+                    }`}
                     priority
+                    onLoad={handleImageLoad}
                   />
                 )}
               </span>
@@ -97,7 +107,7 @@ const LightBox = ({
                   <span className="font-medium text-black">
                     &#34;View in Room&#34;
                   </span>
-                  feature enhances your experience by providing a visual
+                  &nbsp;feature enhances your experience by providing a visual
                   representation of the painting in a room setting, allowing you
                   to better gauge its size and visualize how it will complement
                   your space

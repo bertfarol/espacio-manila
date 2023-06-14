@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import PreviousExhibitions from "../ExhibitionPage/PreviousExhibitions";
 import { Exhibit } from "@/types/exhibit";
 import { fetchExhibitions } from "@/utils/api";
 
 
-export default function ExhibitionsSection() {
-  const [exhibitions, setExhibitions] = useState<Exhibit[]>([])
+type Props = {
+  children: ReactNode;
+};
+
+export default function ExhibitionsSection({ children }: Props) {
+  const [exhibitions, setExhibitions] = useState<Exhibit[]>([]);
 
   const fetchData = async () => {
     const response = await fetchExhibitions();
     setExhibitions(response);
-  }
+  };
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, []);
 
   return (
     <section
@@ -43,7 +46,7 @@ export default function ExhibitionsSection() {
           </Link>
         </div>
         {/* exhibition list */}
-        <PreviousExhibitions data={exhibitions} showAll={false} />
+        {children}
         {/* end**exhibition list */}
       </div>
     </section>

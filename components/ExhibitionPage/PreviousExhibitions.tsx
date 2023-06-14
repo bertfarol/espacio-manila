@@ -22,6 +22,11 @@ const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
     ? previousExhibitions
     : previousExhibitions.slice(0, 2);
 
+  const handleLoading = () => {
+    console.log("image is loaded!");
+    
+  }
+
   return (
     <div
       className={`${
@@ -32,13 +37,18 @@ const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
         <div key={prevExhibit.id}>
           <Link href={`/exhibitions/${prevExhibit.slug}`}>
             <div className="h-[200px] xl:h-[338px]  mb-3">
-              <Image
-                src={`/${prevExhibit.image[0].url}`}
-                width={prevExhibit.image[0].width}
-                height={prevExhibit.image[0].height}
-                alt={prevExhibit.name}
-                className="object-cover object-center h-full duration-100 hover:opacity-80"
-              />
+              {prevExhibit.image ? (
+                <Image
+                  src={`/${prevExhibit.image[0].url}`}
+                  width={prevExhibit.image[0].width}
+                  height={prevExhibit.image[0].height}
+                  alt={prevExhibit.name}
+                  className="object-cover object-center h-full duration-100 hover:opacity-80"
+                  onLoad={handleLoading}
+                />
+              ) : (
+                <div className="bg-slate-200 h-[338px] w-full animate-pulse"></div>
+              )}
             </div>
             <h3 className="text-base font-medium leading-none">
               {prevExhibit.name}

@@ -7,19 +7,21 @@ import TabMenu from "@/components/ArtworkPage/TabMenu";
 import { fetchArtworks, fetchArtworksArtists } from "@/utils/api";
 import PageHead from "@/components/common/PageHead";
 import FilterModal from "@/components/ArtworkPage/FilterModal";
-
+import { SkeletonLoader } from "@/components/common/SkeletonLoader";
 
 interface ArtworksProps {
   artworks: artworkType[];
 }
 
-export default function Artworks({ artworks }: ArtworksProps) {
+export default function Artworks() {
   const [category, setCategory] = useState<string>("all"); //TabMenu: set the type of artworks
   const [filterMenu, setFilterMenu] = useState<string[]>([]); // FilterModal: set the filter menu/data
   const [filterArtist, setFilterArtist] = useState<string>("all"); // FilterModal: set the filter for artwork by artist name
   const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false); // FilterModal: open modal
   const [artistsList, setArtistsList] = useState<string[]>([]); // FilterModal: fetch all artist name
   const [artworkCount, setArtworkCount] = useState<number>(0); // ArtworksList: count the length of the artworks
+  const [artworks, setArtworks] = useState <artworkType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const openFilterModal = (data: string[]) => {
     setIsFilterModalOpen(true);
@@ -34,13 +36,34 @@ export default function Artworks({ artworks }: ArtworksProps) {
     setFilterArtist("all");
   };
 
-  useEffect(() => {
-    const fetchArtists = async () => {
-      const artist = await fetchArtworksArtists();
-      setArtistsList(artist);
-    };
-    fetchArtists();
-  }, []);
+    useEffect(() => {
+      const fetchData = async () => {
+        setIsLoading(true);
+        try {
+          const [artworksData, artistsData] = await Promise.all([
+            fetchArtworks(),
+            fetchArtworksArtists(),
+          ]);
+          setArtworks(artworksData);
+          setArtistsList(artistsData);
+        } catch (error) {
+          console.error(
+            `/components/HomePage/ArtwrokSection Error fetching data: ${error}`
+          );
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchData();
+    }, []);
+
+  // useEffect(() => {
+  //   const fetchArtists = async () => {
+  //     const artist = await fetchArtworksArtists();
+  //     setArtistsList(artist);
+  //   };
+  //   fetchArtists();
+  // }, []);
 
   return (
     <>
@@ -91,13 +114,21 @@ export default function Artworks({ artworks }: ArtworksProps) {
             />
 
             {/* Artworks List */}
-            <ArtworksList
-              artworks={artworks}
-              showAll={true}
-              category={category}
-              artist={filterArtist}
-              setArtworkCount={setArtworkCount}
-            />
+            {isLoading ? (
+              <SkeletonLoader
+                count={8}
+                className="grid-cols-2 px-5 gap-x-4 gap-y-14 lg:grid-cols-4 lg:mt-4"
+              />
+            ) : (
+              <ArtworksList
+                artworks={artworks}
+                showAll={true}
+                category={category}
+                artist={filterArtist}
+                setArtworkCount={setArtworkCount}
+              />
+            )}
+
             {/* /max-width */}
           </div>
         </section>
@@ -106,11 +137,11 @@ export default function Artworks({ artworks }: ArtworksProps) {
   );
 }
 
-export async function getStaticProps() {
-  const artworks = await fetchArtworks();
-  return {
-    props: {
-      artworks,
-    },
-  };
-}
+// export async function getStaticProps() {
+//   const artworks = await fetchArtworks();
+//   return {
+//     props: {
+//       artworks,
+//     },
+//   };
+// }

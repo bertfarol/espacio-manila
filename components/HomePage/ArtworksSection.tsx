@@ -3,20 +3,28 @@ import { fetchArtworks } from "@/utils/api";
 import ArtworksList from "../ArtworkPage/ArtworksList";
 import { Button } from "../common/Button";
 import { Artworks } from "@/types/artworks";
-
+import { SkeletonLoader } from "../common/SkeletonLoader";
 
 export default function ArtworksSection() {
-    const [artworks, setArtworks] = useState<Artworks[]>([]);
+  const [artworks, setArtworks] = useState<Artworks[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const fetchData = async () => {
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
       const response = await fetchArtworks();
       setArtworks(response);
-    };
+    } catch (error) {
+      console.error(`/components/HomePage/ArtwrokSection Error fetching artworks data: ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    useEffect(() => {
-      fetchData();
-    }, []);
-  
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <section
       id="artworks"
@@ -33,8 +41,16 @@ export default function ArtworksSection() {
           </Button>
         </div>
         {/* artwork list */}
-        <ArtworksList artworks={artworks} showAll={false} />
+        {isLoading ? (
+          <SkeletonLoader
+            count={4}
+            className="grid-cols-2 px-5 gap-x-4 gap-y-14 lg:grid-cols-4 lg:mt-4"
+          />
+        ) : (
+          <ArtworksList artworks={artworks} showAll={false} />
+        )}
       </div>
     </section>
   );
 }
+
