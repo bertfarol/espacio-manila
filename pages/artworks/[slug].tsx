@@ -29,13 +29,12 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
       {router.isFallback ? (
         <p>Loading...</p>
       ) : (
-          <p>nice loaded</p>
-        //   <LightBox
-        //   data={artwork}
-        //   handleViewRoom={handleViewRoom}
-        //   handleGoBack={handleGoBack}
-        //   isShowRoom={isShowRoom}
-        // />
+        <LightBox
+          data={artwork}
+          handleViewRoom={handleViewRoom}
+          handleGoBack={handleGoBack}
+          isShowRoom={isShowRoom}
+        />
       )}
     </>
   );
@@ -105,4 +104,3 @@ export const getStaticPaths = async () => {
     };
   }
 };
-
