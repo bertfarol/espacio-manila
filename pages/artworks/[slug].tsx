@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Artworks as ArtworkType } from "@/types/artworks";
-import { fetchArtworks } from "@/utils/api";
+import { fetchArtworks, getArtworkBySlug } from "@/utils/api";
 import LightBox from "@/components/ArtworkPage/LightBox";
 
 type ArtworkProps = {
@@ -17,17 +17,23 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
     router.back();
   };
 
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
   const handleViewRoom = () => {
     setIsShowRoom(!isShowRoom);
   };
 
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
+  if (!router.isFallback && !artwork?.slug) {
+    return <h1>404 - Page Not Found</h1>;
+  }
+
   return (
     <>
-      {artwork && (
+      {router.isFallback ? (
+        <p>Loading...</p>
+      ) : (
         <LightBox
           data={artwork}
           handleViewRoom={handleViewRoom}
@@ -39,40 +45,40 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetchArtworks();
-  const artworks: ArtworkType[] = response;
-
-  const paths = artworks.map((artwork) => ({
-    params: { slug: artwork.slug },
-  }));
-
-  return {
-    paths,
-    fallback: true,
+type Params = {
+  params: {
+    slug: string;
   };
 };
 
-export const getStaticProps: GetStaticProps<ArtworkProps> = async ({
-  params,
-}) => {
-  const { slug } = params ?? {};
+export const getStaticProps = async ({ params }: Params) => {
+  if (!params.slug) return { notFound: true };
 
-  if (!slug) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/artworks/${slug}` //TODO: create a separate utils/api for this line
-  );
-  const artwork: ArtworkType = await response.json();
+  const artwork = await getArtworkBySlug(params.slug);
 
   return {
     props: {
       artwork,
     },
     revalidate: 1,
+  };
+};
+
+export const getStaticPaths = async () => {
+  const artworks = await fetchArtworks();
+
+  // const paths = artworks.map((artwork) => ({
+  //   params: { slug: artwork.slug },
+  // }));
+
+  return {
+    paths: artworks.map((artwork: { slug: string; }) => {
+      return {
+        params: {
+          slug: artwork.slug,
+        },
+      };
+    }),
+    fallback: false,
   };
 };

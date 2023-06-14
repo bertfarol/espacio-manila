@@ -108,7 +108,6 @@ export default function Artworks({ artworks }: ArtworksProps) {
 
 export async function getStaticProps() {
   const artworks = await fetchArtworks();
-
   return {
     props: {
       artworks,

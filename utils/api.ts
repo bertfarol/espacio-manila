@@ -24,6 +24,19 @@ export async function fetchArtworksArtists() {
   }
 }
 
+export async function getArtworkBySlug(slug: string) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/artworks/${slug}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching artworks:", error);
+    return [];
+  }
+}
+
 export async function fetchExhibitions() {
   try {
     const response = await fetch(
