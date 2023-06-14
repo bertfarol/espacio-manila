@@ -110,9 +110,9 @@ export default function SinglePage({ data }: SinglePageProps) {
     setArtworksData(filteredByExhitbion);
   }
 
-  useEffect(() => {   
+  useEffect(() => {
     fetchArtworkData();
-  }, [])
+  }, [fetchArtworkData]);
 
   return (
     <>

@@ -14,7 +14,7 @@ interface MenuModalProps {
   setFilter: Dispatch<SetStateAction<string>>;
 }
 
- const FilterModal = ({
+const FilterModal = ({
   isModalOpen,
   onClose,
   filterMenu,
@@ -23,8 +23,8 @@ interface MenuModalProps {
   const modalRef = useRef<HTMLDivElement>(null);
   const [activeItem, setActiveItem] = useState<string | null>(null);
 
-  const handleMenuClick = (filterDate: string) => {    
-     setFilter(filterDate === "All Artist" ? "all" : filterDate);
+  const handleMenuClick = (filterDate: string) => {
+    setFilter(filterDate === "All Artist" ? "all" : filterDate);
     setActiveItem(filterDate);
   };
 
@@ -32,17 +32,17 @@ interface MenuModalProps {
     (isModalOpen ? "translate-x-0" : "translate-x-[110%]") +
     " fixed top-[15%] right-[15px] bg-white z-30 w-2/3 duration-300 rounded-lg border border-[#E5E7EB] overflow-hidden shadow-modal max-w-[375px] pb-3.5";
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-      onClose();
-      document.body.classList.remove("bg-overlay");
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+        onClose();
+        document.body.classList.remove("bg-overlay");
+      }
+    };
+    
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [handleClickOutside]);
+  }, [handleMenuClick]);
 
   return (
     <div className={modalClass} ref={modalRef}>
@@ -89,6 +89,5 @@ interface MenuModalProps {
     </div>
   );
 };
-
 
 export default FilterModal;

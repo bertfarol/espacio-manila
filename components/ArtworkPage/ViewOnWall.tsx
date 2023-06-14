@@ -20,29 +20,29 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
 }) => {
   const [sofaWidth, setSofaWidth] = useState<number>(0);
 
-  const resizeSofa = () => {
-    const sofa = document.querySelector(".furniture-sofa") as HTMLElement;
-    const painting = document.querySelector(".painting") as HTMLElement;
-
-    const windowHeight = window.innerHeight;
-    const windowWidth = window.innerWidth;
-
-    const sofaWidth = Math.min(windowHeight * 0.75, windowWidth * 0.5);
-
-    sofa.style.width = `${sofaWidth}px`;
-    setSofaWidth(sofaWidth);
-
-    artworkResize(sofaWidth.toString());
-  };
-
   useEffect(() => {
+    const resizeSofa = () => {
+      const sofa = document.querySelector(".furniture-sofa") as HTMLElement;
+      const painting = document.querySelector(".painting") as HTMLElement;
+
+      const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+
+      const sofaWidth = Math.min(windowHeight * 0.75, windowWidth * 0.5);
+
+      sofa.style.width = `${sofaWidth}px`;
+      setSofaWidth(sofaWidth);
+
+      artworkResize(sofaWidth.toString());
+    };
+
     setSofaWidth(window.innerWidth <= 750 ? window.innerWidth * 0.75 : 550);
     resizeSofa();
     window.addEventListener("resize", resizeSofa);
     return () => {
       window.removeEventListener("resize", resizeSofa);
     };
-  }, [resizeSofa]);
+  }, []);
 
   const FURNITURE_ORIGINAL_WIDTH = 228.6; // cm
   const INCH_TO_CM = 2.54;
@@ -92,7 +92,13 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
                 className="furniture-sofa"
                 style={{ width: `${sofaWidth}px` }}
               >
-                <Image src="/brown-sofa.png" alt="" style={{ width: "100%" }} width={837} height={324}/>
+                <Image
+                  src="/brown-sofa.png"
+                  alt=""
+                  style={{ width: "100%" }}
+                  width={837}
+                  height={324}
+                />
               </div>
             </div>
           </div>
