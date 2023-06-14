@@ -1,0 +1,48 @@
+import Image from "next/image";
+import React from "react";
+import { Artworks } from "@/types/artworks";
+
+interface ArtworkCard {
+  artwork: Artworks;
+}
+
+const ArtworkCard = ({ artwork }: ArtworkCard) => {
+
+  const {
+    title,
+    artist,
+    width: artworkWidth,
+    height: artworkHeight,
+    image: { url: imageUrl, width: imageWidth, height: imageHeight },
+  } = artwork;
+  
+
+  return (
+    <>
+      {artwork && (
+        <div className="flex items-center justify-between pr-5 mb-4 overflow-hidden rounded-lg shadow-lg animate-fadeDown">
+          <div className="h-[80px] w-[80px]">
+            <Image
+              src={`/${imageUrl}`}
+              height={imageHeight}
+              width={imageWidth}
+              alt={title}
+              className="object-contain object-left w-full h-full"
+            />
+          </div>
+          <div className="grow">
+            <h3 className="text-sm font-medium leading-tight lg:text-base">
+              {artist}
+            </h3>
+            <p className="text-sm">{title}</p>
+            <p className="text-sm">
+              {artworkWidth} x {artworkHeight} inches
+            </p>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default ArtworkCard;
