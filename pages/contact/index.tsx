@@ -26,7 +26,7 @@ export default function Contact() {
     };
 
     fetchArtwork();
-  }, [router.asPath]);
+  }, [router.asPath, router]);
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function Contact() {
                 <h1 className="text-4xl">Get in touch</h1>
                 <p className="mt-2 mb-6 text-grayText">
                   If you have any questions, feedback, or would like to inquire
-                  about our artwork, please don't hesitate to reach out:
+                  about our artwork, please don&#39;t hesitate to reach out:
                 </p>
 
                 <form className="flex flex-col gap-6 text-sm">

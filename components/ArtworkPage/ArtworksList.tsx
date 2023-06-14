@@ -31,7 +31,7 @@ export default function ArtworksList({
 
   useEffect(() => {
     if (setArtworkCount) setArtworkCount(filteredArtworks.length);
-  }, [filteredArtworks.length]);
+  }, [filteredArtworks.length, setArtworkCount]);
 
   return (
     <div className="grid grid-cols-2 px-5 gap-x-4 gap-y-14 lg:grid-cols-4 lg:mt-4">

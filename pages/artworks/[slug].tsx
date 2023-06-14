@@ -44,7 +44,6 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
     <>
       <PageHead title={title} />
       <div className="h-screen bg-white sm:flex sm:items-center sm:justify-center">
-        {/* <Link href="/artworks"> */} {/* TODO: remove unused code */}
         <Icon
           onClick={isShowRoom ? handleViewRoom : handleGoBack}
           icon="iconamoon:close-light"
@@ -62,6 +61,7 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
                     width={imageWidth}
                     height={imageHeight}
                     className="relative z-10 object-contain object-bottom h-full art-shadow"
+                    priority
                   />
                 )}
               </span>
@@ -71,7 +71,7 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
                 {artist}
               </h1>
               <div className="leading-relaxed mb-7 sm:mb-10 xl:mb-20">
-                <p>"{title}"</p>
+                <p>&#34;{title}&#34;</p>
                 <p>{medium}</p>
                 <p>
                   {artworkWidth} x {artworkHeight} inches
@@ -104,7 +104,9 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
               </div>
               <div className="pt-2 mt-6 border-t">
                 <p className="text-xs text-black/80">
-                  <span className="font-medium text-black">"View in Room"</span>
+                  <span className="font-medium text-black">
+                    &#34;View in Room&#34;
+                  </span>
                   feature enhances your experience by providing a visual
                   representation of the painting in a room setting, allowing you
                   to better gauge its size and visualize how it will complement
@@ -120,6 +122,8 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
         imgHeightInches={artworkHeight}
         showRoom={isShowRoom}
         artworkImage={imageUrl}
+        imageWidth={imageWidth}
+        imageHeight={imageHeight}
       />
     </>
   );

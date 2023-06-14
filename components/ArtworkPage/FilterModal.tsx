@@ -42,7 +42,7 @@ interface MenuModalProps {
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [handleClickOutside]);
 
   return (
     <div className={modalClass} ref={modalRef}>
