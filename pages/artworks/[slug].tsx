@@ -9,15 +9,10 @@ type ArtworkProps = {
 };
 
 export default function ArtworksDetails({ artwork }: ArtworkProps) {
-  const [isShowRoom, setIsShowRoom] = useState(false);
   const router = useRouter();
 
   const handleGoBack = () => {
     router.back();
-  };
-
-  const handleViewRoom = () => {
-    setIsShowRoom(!isShowRoom);
   };
 
   if (!router.isFallback && !artwork?.slug) {
@@ -31,9 +26,7 @@ export default function ArtworksDetails({ artwork }: ArtworkProps) {
       ) : (
         <LightBox
           data={artwork}
-          handleViewRoom={handleViewRoom}
           handleGoBack={handleGoBack}
-          isShowRoom={isShowRoom}
         />
       )}
     </>

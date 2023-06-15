@@ -63,7 +63,7 @@ export async function getStaticProps() {
   const data = await fetchExhibitions();
   const currentDate = new Date();
 
-  // Upcoming Exhibit
+  /* Upcoming Exhibit */
   const upcomingExhibitions = data.filter((exhibition: Exhibit) => {
     const exhibitStartDate = new Date(exhibition.start_date);
     const exhibitEndDate = new Date(exhibition.end_date);

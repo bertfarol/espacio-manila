@@ -20,16 +20,6 @@ html {
  scroll-behavior: smooth;
 }
 
-.art-shadow {
-  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.25))
-    drop-shadow(9px 16px 30px rgba(0, 0, 0, 0.25));
-}
-
-.art-shadow-sm {
-  filter: drop-shadow(0px 2px 6px rgba(0, 0, 0, 0.25))
-    drop-shadow(7px 14px 28px rgba(0, 0, 0, 0.25));
-}
-
 .grid-container {
   display: grid;
   grid-template-columns: 0.7fr 2fr;
@@ -68,10 +58,6 @@ html {
   @apply flex items-center justify-center;
 }
 
-.add-shadow {
-  filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, 0.35))
-    drop-shadow(3px 7px 3px rgba(0, 0, 0, 0.35));
-}
 
 .floor {
   @apply bg-[url("/floor-concrete-finish.webp")] bg-center bg-fill absolute bottom-0 left-[50%] translate-x-[-50%] h-[20%] w-full;

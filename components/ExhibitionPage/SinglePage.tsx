@@ -7,6 +7,7 @@ import { fetchArtworks } from "@/utils/api";
 import ArtworksList from "../ArtworkPage/ArtworksList";
 import PageHead from "../common/PageHead";
 import DateFormat from "../common/DateFormat";
+import { useRouter } from "next/router";
 
 type SinglePageProps = {
   data: Exhibit;
@@ -24,6 +25,14 @@ export default function SinglePage({ data }: SinglePageProps) {
   } = data;
 
   const [artworksData, setArtworksData] = useState<Artworks[]>([]);
+  const [exhibitStat, setExhibitStat] = useState<string>("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const { asPath } = router;
+    const status = asPath.split("status=")[1];
+    setExhibitStat(status);
+  }, [router.asPath, router]);
 
   useEffect(() => {
     const fetchArtworkData = async () => {
@@ -59,8 +68,8 @@ export default function SinglePage({ data }: SinglePageProps) {
                 />
               </div>
               <div className="px-5 lg:px-0 lg:max-w-[424px] flex flex-col justify-between">
-                <p className="px-2 py-1 text-xs font-medium tracking-wider text-white bg-black rounded w-fit">
-                  Upcoming
+                <p className={`${exhibitStat === "previous" ? "bg-[#888888]" : "bg-[#009688]"} px-2 py-1 mb-3 text-xs font-medium tracking-wider text-white rounded w-fit lg:mb-0`}>
+                  {exhibitStat}
                 </p>
                 <div>
                   <h1 className="text-5xl mb-4 lg:mb-[30px]  lg:max-w-[210px] lg:leading-tight">

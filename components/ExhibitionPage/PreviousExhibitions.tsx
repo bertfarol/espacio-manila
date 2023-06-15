@@ -10,7 +10,7 @@ interface PreviousProps {
 
 const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
   const currentDate = new Date();
-
+  
   const previousExhibitions = data.filter((exhibition: Exhibit) => {
     const exhibitStartDate = new Date(exhibition.start_date);
     const exhibitEndDate = new Date(exhibition.end_date);
@@ -24,8 +24,7 @@ const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
 
   const handleLoading = () => {
     console.log("image is loaded!");
-    
-  }
+  };
 
   return (
     <div
@@ -35,7 +34,7 @@ const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
     >
       {exhibitionsData.map((prevExhibit) => (
         <div key={prevExhibit.id}>
-          <Link href={`/exhibitions/${prevExhibit.slug}`}>
+          <Link href={`/exhibitions/${prevExhibit.slug}?status=previous`}>
             <div className="h-[200px] xl:h-[338px]  mb-3">
               {prevExhibit.image ? (
                 <Image

@@ -57,14 +57,6 @@ export default function Artworks() {
       fetchData();
     }, []);
 
-  // useEffect(() => {
-  //   const fetchArtists = async () => {
-  //     const artist = await fetchArtworksArtists();
-  //     setArtistsList(artist);
-  //   };
-  //   fetchArtists();
-  // }, []);
-
   return (
     <>
       <PageHead title={"Artworks"} />

@@ -18,7 +18,7 @@ export default function AboutSection() {
             />
           </div>
           <div className="px-5 lg:px-0 lg:max-w-[424px] flex flex-col justify-between">
-            <p className="px-2 py-1 text-sm font-medium tracking-wider text-black bg-white rounded w-fit">
+            <p className="px-2 py-1 mb-3 text-sm font-medium tracking-wider text-black bg-white rounded w-fit lg:mb-0">
               About Us
             </p>
             <div>

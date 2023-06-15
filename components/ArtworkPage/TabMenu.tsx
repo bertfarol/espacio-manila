@@ -31,7 +31,7 @@ const TabMenu = ({ setCategory }: TabeMenuProps) => {
             key={tabItem.id}
             className={
               (activeTab === tabItem.id ? activeStyle : "lg:border-white") +
-              " border-b-2  py-[0.7rem] lg:py-[0.3rem] hover:border-[#E6EAED]"
+              " border-b-2  py-[0.7rem] lg:py-[0.3rem] lg:hover:border-[#E6EAED]"
             }
             onClick={() => {
               handleTabClick(tabItem.id);

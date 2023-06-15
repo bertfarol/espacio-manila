@@ -97,6 +97,18 @@ export default function Header({
           </div>
           <nav className="flex flex-col text-base">
             <ul>
+              <li onClick={toggleMenu}>
+                <Link
+                  href="/"
+                  className={`${
+                    router.pathname === "/"
+                      ? "underline text-black"
+                      : "text-grayText font-normal"
+                  } text-3xl p-5 border-y  border-[#f3f3f3] block`}
+                >
+                  Home
+                </Link>
+              </li>
               {menuItems.map((menu) => (
                 <li key={menu.name} onClick={toggleMenu}>
                   <Link

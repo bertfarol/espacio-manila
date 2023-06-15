@@ -8,25 +8,23 @@ import ViewOnWall from "./ViewOnWall";
 
 type LightBoxProps = {
   data: Artworks;
-  handleViewRoom: () => void;
   handleGoBack: () => void;
-  isShowRoom: boolean;
 };
 
-const LightBox = ({
-  data,
-  handleViewRoom,
-  handleGoBack,
-  isShowRoom,
-}: LightBoxProps) => {
-    const [showShadow, setShowShadow] = useState(false);
+const LightBox = ({ data, handleGoBack }: LightBoxProps) => {
+  const [showShadow, setShowShadow] = useState(false);
+  const [isShowRoom, setIsShowRoom] = useState(false);
 
-    const handleImageLoad = () => {
-      setTimeout(() => {
-        setShowShadow(true);
-      }, 500);
-    };
-  
+  const handleViewRoom = () => {
+    setIsShowRoom(!isShowRoom);
+  };
+
+  const handleImageLoad = () => {
+    setTimeout(() => {
+      setShowShadow(true);
+    }, 500);
+  };
+
   const {
     title,
     slug,
@@ -41,15 +39,15 @@ const LightBox = ({
   return (
     <>
       <PageHead title={title} />
-      <div className="h-screen bg-white sm:flex sm:items-center sm:justify-center">
-        <div className="fixed z-40 bg-[#F3F2F2] cursor-pointer top-3 left-2 md:top-5 md:left-8 rounded-full p-1">
-          <Icon
-            onClick={isShowRoom ? handleViewRoom : handleGoBack}
-            icon="iconamoon:close-light"
-            className="w-8 h-8"
-          />
+      <div className="h-screen overflow-y-auto bg-white sm:flex sm:items-center sm:justify-center">
+        <div
+          onClick={isShowRoom ? handleViewRoom : handleGoBack}
+          id={isShowRoom ? "handleViewRoom" : "handleGoBack"}
+          className="fixed z-40 bg-[#F3F2F2] cursor-pointer top-3 left-2 md:top-5 md:left-8 rounded-full p-1"
+        >
+          <Icon icon="iconamoon:close-light" className="w-8 h-8" />
         </div>
-        <div className="mx-auto max-w-6xl 2xl:max-w-[1400px] w-full my-12 sm:my-0">
+        <div className="mx-auto max-w-6xl 2xl:max-w-[1400px] w-full py-12 sm:my-0">
           <div className="flex flex-col items-center justify-center gap-10 p-4 bg-white md:flex-row">
             <div className="relative mb-3 h-[350px] lg:h-[450px] 2xl:h-[650px] grow flex justify-center before:content-[''] before:absolute before:bg-[url('/dotted-box-gray.png')] 3xl:before:h-[93px] before:w-[88px] before:left-0 before:bottom-[-35px] after:content-[''] after:absolute after:bg-[url('/dotted-box-gray.png')] 3xl:after:h-[93px] after:w-[88px] after:right-0 after:bottom-[-35px]">
               <span>
@@ -60,7 +58,7 @@ const LightBox = ({
                     width={imageWidth}
                     height={imageHeight}
                     className={`relative z-10 object-contain object-bottom h-full duration-300 ${
-                      showShadow ? "art-shadow" : ""
+                      showShadow ? "drop-shadow-3xl lg:drop-shadow-4xl" : ""
                     }`}
                     priority
                     onLoad={handleImageLoad}

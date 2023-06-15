@@ -45,7 +45,7 @@ export default function ArtworksList({
         <Link
           href={`/artworks/${art.slug}`}
           key={art.id}
-          className="cursor-pointer hover:bg-gray-200/40 group"
+          className="cursor-pointer lg:hover:bg-gray-200/40 group"
         >
           <div className="mb-3 lg:h-[350px] relative">
             <Image
@@ -53,7 +53,7 @@ export default function ArtworksList({
               alt={art.title}
               width={art.image.width}
               height={art.image.height}
-              className={`object-contain object-bottom h-full duration-300 ${showShadow ? "art-shadow-sm" : ""}`}
+              className={`object-contain object-bottom h-full duration-300 ${showShadow ? "drop-shadow-3xl" : ""}`}
               onLoad={handleImageLoad}
             />
             <div className="group-hover:flex hidden tracking-wider items-center justify-center text-sm text-white bg-black/80 rounded-full h-14 w-14 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">

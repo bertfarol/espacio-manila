@@ -84,7 +84,7 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
         <div className="wall">
           <div className="wall-inner-wrap">
             <Image
-              className="painting add-shadow"
+              className="painting drop-shadow-3xl"
               src={`/${artworkImage}`}
               alt="Espacio Manila - Painting"
               style={{ width: "100%" }}

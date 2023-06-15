@@ -38,6 +38,16 @@ module.exports = {
       boxShadow: {
         modal: "0 3px 6px rgba(0,0,0,0.16)",
       },
+      dropShadow: {
+        "3xl": [
+          "0px 2px 1px rgba(0, 0, 0, 0.35)",
+          "3px 7px 3px rgba(0, 0, 0, 0.35)",
+        ],
+        "4xl": [
+          "2px 4px 8px rgba(0, 0, 0, 0.25)",
+          "9px 16px 30px rgba(0, 0, 0, 0.25)",
+        ],
+      },
       fontSize: {
         xl: [
           "1rem", //h5 16px

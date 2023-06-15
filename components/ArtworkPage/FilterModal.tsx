@@ -30,7 +30,7 @@ const FilterModal = ({
 
   const modalClass =
     (isModalOpen ? "translate-x-0" : "translate-x-[110%]") +
-    " fixed top-[15%] right-[15px] bg-white z-30 w-2/3 duration-300 rounded-lg border border-[#E5E7EB] overflow-hidden shadow-modal max-w-[375px] pb-3.5";
+    " fixed top-[15%] right-[15px] bg-white z-30 w-10/12 md:w-2/3 duration-300 rounded-lg border border-[#E5E7EB] overflow-hidden shadow-modal max-w-[375px] pb-3.5";
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
