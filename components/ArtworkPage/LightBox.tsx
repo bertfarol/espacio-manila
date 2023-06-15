@@ -42,13 +42,15 @@ const LightBox = ({
     <>
       <PageHead title={title} />
       <div className="h-screen bg-white sm:flex sm:items-center sm:justify-center">
-        <Icon
-          onClick={isShowRoom ? handleViewRoom : handleGoBack}
-          icon="iconamoon:close-light"
-          className="absolute z-40 w-8 h-8 cursor-pointer top-3 left-2 md:top-5 md:left-8"
-        />
+        <div className="fixed z-40 bg-[#F3F2F2] cursor-pointer top-3 left-2 md:top-5 md:left-8 rounded-full p-1">
+          <Icon
+            onClick={isShowRoom ? handleViewRoom : handleGoBack}
+            icon="iconamoon:close-light"
+            className="w-8 h-8"
+          />
+        </div>
         <div className="mx-auto max-w-6xl 2xl:max-w-[1400px] w-full my-12 sm:my-0">
-          <div className="flex flex-col items-center justify-center gap-10 p-4 md:flex-row">
+          <div className="flex flex-col items-center justify-center gap-10 p-4 bg-white md:flex-row">
             <div className="relative mb-3 h-[350px] lg:h-[450px] 2xl:h-[650px] grow flex justify-center before:content-[''] before:absolute before:bg-[url('/dotted-box-gray.png')] 3xl:before:h-[93px] before:w-[88px] before:left-0 before:bottom-[-35px] after:content-[''] after:absolute after:bg-[url('/dotted-box-gray.png')] 3xl:after:h-[93px] after:w-[88px] after:right-0 after:bottom-[-35px]">
               <span>
                 {imageUrl && (

@@ -31,7 +31,7 @@ const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
     <div
       className={`${
         showAll ? "lg:grid-cols-3" : "lg:grid-cols-2"
-      } grid gap-6 sm:grid-cols-2`}
+      } grid gap-6 grid-cols-1 sm:grid-cols-2`}
     >
       {exhibitionsData.map((prevExhibit) => (
         <div key={prevExhibit.id}>
