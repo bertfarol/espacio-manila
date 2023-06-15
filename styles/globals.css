@@ -17,7 +17,7 @@
 }
 
 html {
- scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 .grid-container {
@@ -58,7 +58,6 @@ html {
   @apply flex items-center justify-center;
 }
 
-
 .floor {
   @apply bg-[url("/floor-concrete-finish.webp")] bg-center bg-fill absolute bottom-0 left-[50%] translate-x-[-50%] h-[20%] w-full;
 }
@@ -81,4 +80,11 @@ html {
   @apply translate-x-0 translate-y-[30%] z-50;
 }
 
+.painting {
+  transition: all 300ms ease 0s;
+}
 
+.image-animate {
+  transform: translate(-224px, 83px) scale(3.5);
+  z-index: 71;
+}

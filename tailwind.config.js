@@ -12,9 +12,19 @@ module.exports = {
           "0%": { opacity: "0", transform: "translateY(-10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        zoomOut: {
+          "0%": { transform: "translate(-224px, 83px) scale(3.5)" },
+          "100%": { transform: "translate(0, 0) scale(1)" },
+        },
+        zoomOutMobile: {
+          "0%": { transform: "translate(0px, -146px) scale(7.5)" },
+          "100%": { transform: "translate(0, 0) scale(1)" },
+        },
       },
       animation: {
         fadeDown: "fadeDown 500ms ease-in-out forwards",
+        zoomOut: "zoomOut 300ms forwards",
+        zoomOutMobile: "zoomOutMobile 300ms forwards",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

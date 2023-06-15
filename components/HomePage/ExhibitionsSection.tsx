@@ -3,22 +3,27 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { Exhibit } from "@/types/exhibit";
 import { fetchExhibitions } from "@/utils/api";
+import { SkeletonLoader } from "../common/SkeletonLoader";
+import PreviousExhibitions from "../ExhibitionPage/PreviousExhibitions";
 
 
-type Props = {
-  children: ReactNode;
-};
-
-export default function ExhibitionsSection({ children }: Props) {
+export default function ExhibitionsSection() {
   const [exhibitions, setExhibitions] = useState<Exhibit[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = async () => {
-    const response = await fetchExhibitions();
-    setExhibitions(response);
+  const fetchExhibitionData = async () => {
+    try {
+      const exhibitions = await fetchExhibitions();
+      setExhibitions(exhibitions);
+    } catch (error) {
+      console.error(`/page/index Error fetching exhibition data: ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchExhibitionData();
   }, []);
 
   return (
@@ -46,8 +51,11 @@ export default function ExhibitionsSection({ children }: Props) {
           </Link>
         </div>
         {/* exhibition list */}
-        {children}
-        {/* end**exhibition list */}
+        {isLoading ? (
+          <SkeletonLoader count={2} className={"gap-6 sm:grid-cols-2"} />
+        ) : (
+          <PreviousExhibitions data={exhibitions} showAll={false} />
+        )}
       </div>
     </section>
   );

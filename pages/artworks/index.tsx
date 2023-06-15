@@ -20,8 +20,8 @@ export default function Artworks() {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false); // FilterModal: open modal
   const [artistsList, setArtistsList] = useState<string[]>([]); // FilterModal: fetch all artist name
   const [artworkCount, setArtworkCount] = useState<number>(0); // ArtworksList: count the length of the artworks
-  const [artworks, setArtworks] = useState <artworkType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [artworks, setArtworks] = useState<artworkType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const openFilterModal = (data: string[]) => {
     setIsFilterModalOpen(true);
@@ -36,26 +36,26 @@ export default function Artworks() {
     setFilterArtist("all");
   };
 
-    useEffect(() => {
-      const fetchData = async () => {
-        setIsLoading(true);
-        try {
-          const [artworksData, artistsData] = await Promise.all([
-            fetchArtworks(),
-            fetchArtworksArtists(),
-          ]);
-          setArtworks(artworksData);
-          setArtistsList(artistsData);
-        } catch (error) {
-          console.error(
-            `/components/HomePage/ArtwrokSection Error fetching data: ${error}`
-          );
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [artworksData, artistsData] = await Promise.all([
+          fetchArtworks(),
+          fetchArtworksArtists(),
+        ]);
+        setArtworks(artworksData);
+        setArtistsList(artistsData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(
+          `/components/HomePage/ArtwrokSection Error fetching data: ${error}`
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -63,7 +63,7 @@ export default function Artworks() {
       <Layout defaultHeader={true}>
         <section className="py-20 lg:py-32 lg:pt-24">
           <div className="max-w-6xl 2xl:max-w-[1400px] mx-auto w-full">
-            {/* max-width */} 
+            {/* max-width */}
             <div className="lg:flex lg:items-center">
               <div className="px-5 mb-5 lg:mb-0">
                 <h2 className="text-5xl">Artworks</h2>

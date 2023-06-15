@@ -9,6 +9,7 @@ interface ArtworksProps {
   category?: string;
   artist?: string;
   setArtworkCount?: Dispatch<SetStateAction<number>>;
+  isLoading: boolean;
 }
 
 export default function ArtworksList({
@@ -17,13 +18,14 @@ export default function ArtworksList({
   category,
   artist,
   setArtworkCount,
+  isLoading,
 }: ArtworksProps) {
   const [showShadow, setShowShadow] = useState(false);
 
   const handleImageLoad = () => {
-      setTimeout(() => {
-        setShowShadow(true);
-      }, 500); 
+    setTimeout(() => {
+      setShowShadow(true);
+    }, 500);
   };
 
   const filteredArtworks = artworks.filter((art) => {
@@ -47,13 +49,19 @@ export default function ArtworksList({
           key={art.id}
           className="cursor-pointer lg:hover:bg-gray-200/40 group"
         >
-          <div className="mb-3 lg:h-[350px] relative">
+          <div
+            className={`${
+              showShadow ? "bg-transparent" : "bg-[#F3F2F2] animate-pulse"
+            } mb-3 lg:h-[350px] relative`}
+          >
             <Image
               src={`/${art.image.url}`}
               alt={art.title}
               width={art.image.width}
               height={art.image.height}
-              className={`object-contain object-bottom h-full duration-300 ${showShadow ? "drop-shadow-3xl" : ""}`}
+              className={`object-contain object-bottom h-full duration-300 ${
+                showShadow ? "drop-shadow-3xl" : ""
+              }`}
               onLoad={handleImageLoad}
             />
             <div className="lg:group-hover:flex hidden tracking-wider items-center justify-center text-sm text-white bg-black/80 rounded-full h-14 w-14 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
