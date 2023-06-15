@@ -9,7 +9,6 @@ interface ArtworksProps {
   category?: string;
   artist?: string;
   setArtworkCount?: Dispatch<SetStateAction<number>>;
-  isLoading: boolean;
 }
 
 export default function ArtworksList({
@@ -18,7 +17,6 @@ export default function ArtworksList({
   category,
   artist,
   setArtworkCount,
-  isLoading,
 }: ArtworksProps) {
   const [showShadow, setShowShadow] = useState(false);
 
