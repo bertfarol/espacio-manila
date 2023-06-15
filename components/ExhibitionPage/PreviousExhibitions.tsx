@@ -9,11 +9,11 @@ interface PreviousProps {
 }
 
 const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
-  const currentDate = new Date();
   
-  const previousExhibitions = data.filter((exhibition: Exhibit) => {
+  const previousExhibitions = data.filter((exhibition) => {
     const exhibitStartDate = new Date(exhibition.start_date);
     const exhibitEndDate = new Date(exhibition.end_date);
+    const currentDate = new Date();
 
     return exhibitStartDate < currentDate || exhibitEndDate < currentDate;
   });
@@ -28,7 +28,6 @@ const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
 
   return (
     <>
-      <p>{exhibitionsData.length}</p>
       <div
         className={`${
           showAll ? "lg:grid-cols-3" : "lg:grid-cols-2"
