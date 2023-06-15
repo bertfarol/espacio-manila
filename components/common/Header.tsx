@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,6 +29,11 @@ export default function Header({
 }: HeaderProps) {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+   const [currentPath, setCurrentPath] = useState("");
+
+   useEffect(() => {
+     setCurrentPath(router.asPath);
+   }, [router.asPath]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -38,8 +43,7 @@ export default function Header({
   const headerClass = defaultHeader ? "top-0 bg-black" : "top-5";
   const menuColorClass = defaultHeader ? "text-white/60" : "text-white/80";
   const customTextColor = color === "dark" ? "text-black" : menuColorClass;
-  const activeColor =
-    color === "dark" ? "text-black underline" : "text-white underline";
+  const activeColor = color === "dark" ? "text-black underline" : "text-white underline";
 
   return (
     <>
@@ -71,11 +75,11 @@ export default function Header({
               {menuItems.map((menu) => (
                 <li
                   key={menu.name}
-                  className={router.pathname === menu.link ? activeColor : ""}
+                  className={`${currentPath === menu.link ? activeColor : ""} underline-offset-8	decoration-2`}
                 >
                   <Link
                     href={menu.link}
-                    className="px-3 py-2 duration-300 rounded hover:underline"
+                    className="px-3 py-2 duration-300 rounded hover:underline "
                   >
                     {menu.name}
                   </Link>

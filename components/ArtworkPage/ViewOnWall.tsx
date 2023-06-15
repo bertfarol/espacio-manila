@@ -10,6 +10,19 @@ interface ArtworkRoomProps {
   imageHeight: number;
 }
 
+interface SofaDetails {
+  imageSrc: string;
+  imgWidth: number;
+  imgHeight: number;
+}
+
+interface FloorDetails {
+  imageSrc: string;
+  imgWidth: number;
+  imgHeight: number;
+}
+
+
 const ViewOnWall: React.FC<ArtworkRoomProps> = ({
   imgWidthInches,
   imgHeightInches,
@@ -22,7 +35,28 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
   const FURNITURE_ORIGINAL_WIDTH = 228.6; // cm
   const INCH_TO_CM = 2.54;
 
+const [sofaDetails, setSofaDetails] = useState<SofaDetails>({
+  imageSrc: "/light-blue-sofa.png",
+  imgWidth: 837,
+  imgHeight: 356,
+});
+  
+const [floorBG, setFloorBG] = useState<string>("/light-floor.png");
 
+const handleSofaButton = (newSrc: string,  newWidth: number,  newHeight: number): void => {
+  setSofaDetails({
+    imageSrc: newSrc,
+    imgWidth: newWidth,
+    imgHeight: newHeight,
+  });
+};
+
+  const handleFloorButton = (floorBg:string) => {
+    setFloorBG(floorBg);
+  }
+
+const { imageSrc, imgWidth, imgHeight } = sofaDetails;
+ 
 
   useEffect(() => {
     const resizeSofa = () => {
@@ -84,7 +118,9 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
         <div className="wall">
           <div className="wall-inner-wrap">
             <Image
-              className={`${showRoom ? "animate-zoomOutMobile md:animate-zoomOut" : ""} z-[70] painting drop-shadow-3xl`}
+              className={`${
+                showRoom ? "animate-zoomOutMobile md:animate-zoomOut" : ""
+              } z-[70] painting drop-shadow-3xl`}
               src={`/${artworkImage}`}
               alt="Espacio Manila - Painting"
               style={{ width: "100%" }}
@@ -94,16 +130,54 @@ const ViewOnWall: React.FC<ArtworkRoomProps> = ({
 
             <div className="furniture-sofa" style={{ width: `${sofaWidth}px` }}>
               <Image
-                src="/brown-sofa.png"
+                src={imageSrc}
                 alt=""
                 style={{ width: "100%" }}
-                width={837}
-                height={324}
+                width={imgWidth}
+                height={imgHeight}
               />
             </div>
           </div>
         </div>
-        <div className="floor"></div>
+        <div
+          className="bg-center floor bg-floor-xs sm:bg-floor-sm md:bg-fill"
+          style={{ background: `url(${floorBG})` }}
+        ></div>
+
+        <div className="fixed flex flex-col gap-6 top-10 right-10 ">
+          <button
+            onClick={() => handleSofaButton("/brown-sofa.png", 837, 324)}
+            className="w-20 px-1.5 bg-white h-14 rounded-md shadow-lg border border-[#E6EAED] hover:border-[#009688] group"
+          >
+            <Image
+              src="/brown-sofa.png"
+              alt=""
+              width={837}
+              height={324}
+              className="duration-300 group-hover:scale-90"
+            />
+          </button>
+          <button
+            onClick={() => handleSofaButton("/light-blue-sofa.png", 837, 356)}
+            className="w-20 px-1.5 bg-white h-14 rounded-md shadow-lg border border-[#E6EAED] hover:border-[#009688] group"
+          >
+            <Image
+              src="/light-blue-sofa.png"
+              alt=""
+              width={837}
+              height={356}
+              className="duration-300 group-hover:scale-90"
+            />
+          </button>
+          <button
+            onClick={() => handleFloorButton("/dark-floor.png")}
+            className="w-20 px-1.5 bg-white h-14 rounded-md bg-[url(/dark-floor.png)] border border-[#E6EAED] shadow-lg hover:border-[#009688] hover:opacity-90"
+          ></button>
+          <button
+            onClick={() => handleFloorButton("/light-floor.png")}
+            className="w-20 px-1.5 bg-white h-14 rounded-md bg-[url(/light-floor.png)] border border-[#E6EAED] shadow-lg hover:border-[#009688] hover:opacity-90"
+          ></button>
+        </div>
       </div>
     </div>
   );

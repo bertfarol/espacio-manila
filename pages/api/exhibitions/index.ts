@@ -51,6 +51,22 @@ const exhibitions: ExhibitionData[] = [
       },
     ],
   },
+  {
+    id: 6,
+    name: "Inside the toy box",
+    slug: "inside-the-toy-box",
+    start_date: "2022-12-01T00:00:00Z",
+    end_date: "2022-12-02T00:00:00Z",
+    location: "Espacio Manila Gallery, Festival Mall, Muntinlupa City",
+    artist: ["Mayi Peñaflorida"],
+    image: [
+      {
+        url: "exhibitions/thumb_03.jpg",
+        width: 958,
+        height: 500,
+      },
+    ],
+  },
 ];
 
 

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  important: true,
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,6 +34,9 @@ module.exports = {
       },
       backgroundSize: {
         fill: "100% 100%",
+        "floor-xs": "234% 34%",
+        "floor-sm": "234% 42%",
+        "floor-lg": "4px 31px",
       },
       colors: {
         grayText: "#4d4d4d",

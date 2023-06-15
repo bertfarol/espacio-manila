@@ -31,12 +31,6 @@ html {
   @apply mb-12 flex flex-col items-center flex-[100%] max-w-[100%];
 }
 
-@media (min-width: 1024px) {
-  .contact-icon {
-    @apply flex-[50%] max-w-[50%];
-  }
-}
-
 .room-wrapper {
   @apply fixed top-0 left-0 flex items-center justify-center w-full h-full overflow-hidden bg-white;
 }
@@ -46,7 +40,8 @@ html {
 }
 
 .wall {
-  @apply relative h-[80%];
+  @apply relative h-[80%] bg-repeat-x bg-[url("/wall-skirt.png")] bg-left-bottom;
+  background-size: 4px 10px;
 }
 
 .wall-inner-wrap {
@@ -59,11 +54,11 @@ html {
 }
 
 .floor {
-  @apply bg-[url("/floor-concrete-finish.webp")] bg-center bg-fill absolute bottom-0 left-[50%] translate-x-[-50%] h-[20%] w-full;
+  @apply  absolute bottom-0 left-[50%] translate-x-[-50%] h-[20%] w-full;
 }
 
 .floor:before {
-  box-shadow: inset 0 26px 36px -14px #000000d9;
+  box-shadow: inset 0 18px 16px -14px #252525;
   content: "";
   position: absolute;
   top: 0;
@@ -87,4 +82,22 @@ html {
 .image-animate {
   transform: translate(-224px, 83px) scale(3.5);
   z-index: 71;
+}
+
+@media (min-width: 640px) {
+  .wall {
+    background-size: 4px 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-icon {
+    @apply flex-[50%] max-w-[50%];
+  }
+}
+
+@media (min-width: 1536px) {
+  .wall {
+    background-size: 4px 31px;
+  }
 }
