@@ -56,7 +56,7 @@ export default function ArtworksList({
               className={`object-contain object-bottom h-full duration-300 ${showShadow ? "drop-shadow-3xl" : ""}`}
               onLoad={handleImageLoad}
             />
-            <div className="group-hover:flex hidden tracking-wider items-center justify-center text-sm text-white bg-black/80 rounded-full h-14 w-14 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+            <div className="lg:group-hover:flex hidden tracking-wider items-center justify-center text-sm text-white bg-black/80 rounded-full h-14 w-14 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               View
             </div>
           </div>

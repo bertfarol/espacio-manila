@@ -27,41 +27,44 @@ const PreviousExhibitions = ({ data, showAll }: PreviousProps) => {
   };
 
   return (
-    <div
-      className={`${
-        showAll ? "lg:grid-cols-3" : "lg:grid-cols-2"
-      } grid gap-6 grid-cols-1 sm:grid-cols-2`}
-    >
-      {exhibitionsData.map((prevExhibit) => (
-        <div key={prevExhibit.id}>
-          <Link href={`/exhibitions/${prevExhibit.slug}?status=previous`}>
-            <div className="h-[200px] xl:h-[338px]  mb-3">
-              {prevExhibit.image ? (
-                <Image
-                  src={`/${prevExhibit.image[0].url}`}
-                  width={prevExhibit.image[0].width}
-                  height={prevExhibit.image[0].height}
-                  alt={prevExhibit.name}
-                  className="object-cover object-center h-full duration-100 hover:opacity-80"
-                  onLoad={handleLoading}
+    <>
+      <p>{exhibitionsData.length}</p>
+      <div
+        className={`${
+          showAll ? "lg:grid-cols-3" : "lg:grid-cols-2"
+        } grid gap-6 grid-cols-1 sm:grid-cols-2`}
+      >
+        {exhibitionsData.map((prevExhibit) => (
+          <div key={prevExhibit.id}>
+            <Link href={`/exhibitions/${prevExhibit.slug}?status=previous`}>
+              <div className="h-[200px] xl:h-[338px]  mb-3">
+                {prevExhibit.image ? (
+                  <Image
+                    src={`/${prevExhibit.image[0].url}`}
+                    width={prevExhibit.image[0].width}
+                    height={prevExhibit.image[0].height}
+                    alt={prevExhibit.name}
+                    className="object-cover object-center h-full duration-100 hover:opacity-80"
+                    onLoad={handleLoading}
+                  />
+                ) : (
+                  <div className="bg-slate-200 h-[338px] w-full animate-pulse"></div>
+                )}
+              </div>
+              <h3 className="text-base font-medium leading-none">
+                {prevExhibit.name}
+              </h3>
+              <span className="text-sm text-[#7d7d7d]">
+                <DateFormat
+                  startDate={prevExhibit.start_date}
+                  endDate={prevExhibit.end_date}
                 />
-              ) : (
-                <div className="bg-slate-200 h-[338px] w-full animate-pulse"></div>
-              )}
-            </div>
-            <h3 className="text-base font-medium leading-none">
-              {prevExhibit.name}
-            </h3>
-            <span className="text-sm text-[#7d7d7d]">
-              <DateFormat
-                startDate={prevExhibit.start_date}
-                endDate={prevExhibit.end_date}
-              />
-            </span>
-          </Link>
-        </div>
-      ))}
-    </div>
+              </span>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

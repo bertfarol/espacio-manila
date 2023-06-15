@@ -69,7 +69,7 @@ export default function SinglePage({ data }: SinglePageProps) {
               </div>
               <div className="px-5 lg:px-0 lg:max-w-[424px] flex flex-col justify-between">
                 <p className={`${exhibitStat === "previous" ? "bg-[#888888]" : "bg-[#009688]"} px-2 py-1 mb-3 text-xs font-medium tracking-wider text-white rounded w-fit lg:mb-0`}>
-                  {exhibitStat}
+                  <span className="capitalize">{exhibitStat}</span>
                 </p>
                 <div>
                   <h1 className="text-5xl mb-4 lg:mb-[30px]  lg:max-w-[210px] lg:leading-tight">

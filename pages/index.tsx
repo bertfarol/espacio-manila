@@ -59,12 +59,12 @@ export default function Home() {
       <Layout headerColor={headerColor} headerPosition={"fixed"}>
         <HeroSection />
         <ExhibitionsSection>
-          <SkeletonLoader count={2} className={"gap-6 sm:grid-cols-2"} />
-          {/* {isLoading ? (
+          {/* <SkeletonLoader count={2} className={"gap-6 sm:grid-cols-2"} /> */}
+          {isLoading ? (
             <SkeletonLoader count={2} className={"gap-6 sm:grid-cols-2"} />
           ) : (
             <PreviousExhibitions data={exhibitions} showAll={false} />
-          )} */}
+          )}
         </ExhibitionsSection>
         <AboutSection />
         <ArtworksSection />
