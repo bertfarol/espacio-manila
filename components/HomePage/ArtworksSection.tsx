@@ -46,7 +46,7 @@ export default function ArtworksSection() {
             className="grid-cols-2 px-5 gap-x-4 gap-y-14 lg:grid-cols-4 lg:mt-4"
           />
         ) : (
-            <ArtworksList artworks={artworks} showAll={false} isLoading={isLoading} />
+            <ArtworksList artworks={artworks} showAll={false} />
         )}
       </div>
     </section>
