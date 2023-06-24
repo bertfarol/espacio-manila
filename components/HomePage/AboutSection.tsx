@@ -17,11 +17,7 @@ export default function AboutSection() {
               className="lg:object-cover lg:h-full lg:object-center"
             />
           </div>
-          <div className="px-5 lg:px-0 lg:max-w-[424px] flex flex-col justify-between">
-            <p className="px-2 py-1 text-xs font-medium tracking-wider bg-white rounded w-fit">
-              About Us
-            </p>
-            <div>
+          <div className="px-5 lg:px-0 lg:max-w-[424px] flex flex-col justify-end">
               <h2 className="text-4xl  mb-4 lg:text-5xl lg:mb-[30px] text-white lg:max-w-[210px] lg:leading-tight">
                 Espacio Manila
               </h2>
@@ -41,7 +37,6 @@ export default function AboutSection() {
                 be a testament to the profound relations between art and the
                 human race.
               </p>
-            </div>
           </div>
         </div>
       </div>

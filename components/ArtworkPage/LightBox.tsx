@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Artworks } from "@/types/artworks";
 import PageHead from "../common/PageHead";
 import ViewOnWall from "./ViewOnWall";
+import { RGBDataUrl } from "../common/RGBDataUrl";
 
 type LightBoxProps = {
   data: Artworks;
@@ -50,9 +51,7 @@ const LightBox = ({ data, handleGoBack }: LightBoxProps) => {
         <div className="mx-auto max-w-6xl 2xl:max-w-[1400px] w-full py-12 sm:my-0">
           <div className="flex flex-col items-center justify-center gap-10 p-4 md:flex-row">
             <div
-              className={`${
-                showShadow ? "bg-transparent" : "bg-[#F3F2F2] animate-pulse"
-              } relative mb-3 h-[350px] lg:h-[450px] 2xl:h-[650px] grow flex justify-center before:content-[''] before:absolute before:bg-[url('/dotted-box-gray.png')] 3xl:before:h-[93px] before:w-[88px] before:left-0 before:bottom-[-35px] after:content-[''] after:absolute after:bg-[url('/dotted-box-gray.png')] 3xl:after:h-[93px] after:w-[88px] after:right-0 after:bottom-[-35px]`}
+              className={`relative mb-3 h-[350px] lg:h-[450px] 2xl:h-[650px] grow flex justify-center before:content-[''] before:absolute before:bg-[url('/dotted-box-gray.png')] 3xl:before:h-[93px] before:w-[88px] before:left-0 before:bottom-[-35px] after:content-[''] after:absolute after:bg-[url('/dotted-box-gray.png')] 3xl:after:h-[93px] after:w-[88px] after:right-0 after:bottom-[-35px]`}
             >
               <span>
                 {imageUrl && (
@@ -66,6 +65,8 @@ const LightBox = ({ data, handleGoBack }: LightBoxProps) => {
                     }`}
                     priority
                     onLoad={handleImageLoad}
+                    placeholder="blur"
+                    blurDataURL={RGBDataUrl(243, 242, 242)}
                   />
                 )}
               </span>

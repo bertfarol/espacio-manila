@@ -69,7 +69,7 @@ export default function Artworks() {
                 <h2 className="text-5xl">Artworks</h2>
               </div>
               <TabMenu setCategory={setCategory} />
-              <div className="py-[10px] lg:py-0 px-5 border-b border-[#E5E7EB] flex items-center gap-2 lg:border-none lg:grow lg:justify-end">
+              <div className="py-[10px] lg:py-0 px-5 border-b border-[#E5E7EB] flex items-center gap-2 lg:border-none lg:grow justify-end">
                 <button
                   onClick={() => openFilterModal(artistsList)}
                   className="text-xs  xl:text-sm flex gap-2 border-[#E6EAED] border items-center py-[8px] px-[15px] leading-tight rounded-full hover:bg-[#f4f4f4]"

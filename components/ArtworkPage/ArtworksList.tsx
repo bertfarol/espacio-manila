@@ -2,6 +2,8 @@ import { Artworks } from "@/types/artworks";
 import Image from "next/image";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { RGBDataUrl } from "../common/RGBDataUrl";
+
 
 interface ArtworksProps {
   artworks: Artworks[];
@@ -47,11 +49,7 @@ export default function ArtworksList({
           key={art.id}
           className="cursor-pointer lg:hover:bg-gray-200/40 group"
         >
-          <div
-            className={`${
-              showShadow ? "bg-transparent" : "bg-[#F3F2F2] animate-pulse"
-            } mb-3 lg:h-[350px] relative`}
-          >
+          <div className={`mb-3 lg:h-[350px] relative`}>
             <Image
               src={`/${art.image.url}`}
               alt={art.title}
@@ -60,7 +58,9 @@ export default function ArtworksList({
               className={`object-contain object-bottom h-full duration-300 ${
                 showShadow ? "drop-shadow-3xl" : ""
               }`}
-              onLoad={handleImageLoad}
+              placeholder="blur"
+              blurDataURL={RGBDataUrl(243, 242, 242)}
+              onLoadingComplete={handleImageLoad}
             />
             <div className="lg:group-hover:flex hidden tracking-wider items-center justify-center text-sm text-white bg-black/80 rounded-full h-14 w-14 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
               View

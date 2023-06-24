@@ -34,9 +34,7 @@ module.exports = {
       },
       backgroundSize: {
         fill: "100% 100%",
-        "floor-xs": "234% 34%",
-        "floor-sm": "234% 42%",
-        "floor-lg": "4px 31px",
+        "floor-xs": "234% 70%",
       },
       colors: {
         grayText: "#4d4d4d",
@@ -53,6 +51,10 @@ module.exports = {
         modal: "0 3px 6px rgba(0,0,0,0.16)",
       },
       dropShadow: {
+        "xs": [
+          "0px 1px 1px rgba(0, 0, 0, 0.35)",
+          "2px 3px 1px rgba(0, 0, 0, 0.35)",
+        ],
         "3xl": [
           "0px 2px 1px rgba(0, 0, 0, 0.35)",
           "3px 7px 3px rgba(0, 0, 0, 0.35)",

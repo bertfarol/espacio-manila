@@ -120,7 +120,7 @@ const { imageSrc, imgWidth, imgHeight } = sofaDetails;
             <Image
               className={`${
                 showRoom ? "animate-zoomOutMobile md:animate-zoomOut" : ""
-              } z-[70] painting drop-shadow-3xl`}
+              } z-[70] painting drop-shadow-xs md:drop-shadow-3xl`}
               src={`/${artworkImage}`}
               alt="Espacio Manila - Painting"
               style={{ width: "100%" }}
@@ -140,14 +140,14 @@ const { imageSrc, imgWidth, imgHeight } = sofaDetails;
           </div>
         </div>
         <div
-          className="bg-center floor bg-floor-xs sm:bg-floor-sm md:bg-fill"
+          className="bg-center floor bg-floor-xs md:bg-fill"
           style={{ background: `url(${floorBG})` }}
         ></div>
 
         <div className="fixed flex flex-col gap-6 top-10 right-10 ">
           <button
             onClick={() => handleSofaButton("/brown-sofa.png", 837, 324)}
-            className="w-20 px-1.5 bg-white h-14 rounded-md shadow-lg border border-[#E6EAED] hover:border-[#009688] group"
+            className="w-14 h-10 md:w-20 md:h-14 px-1.5 bg-white  rounded-md shadow-lg border border-[#E6EAED] hover:border-[#009688] group"
           >
             <Image
               src="/brown-sofa.png"
@@ -159,7 +159,7 @@ const { imageSrc, imgWidth, imgHeight } = sofaDetails;
           </button>
           <button
             onClick={() => handleSofaButton("/light-blue-sofa.png", 837, 356)}
-            className="w-20 px-1.5 bg-white h-14 rounded-md shadow-lg border border-[#E6EAED] hover:border-[#009688] group"
+            className="w-14 h-10 md:w-20 md:h-14 px-1.5 bg-white  rounded-md shadow-lg border border-[#E6EAED] hover:border-[#009688] group"
           >
             <Image
               src="/light-blue-sofa.png"
@@ -171,11 +171,11 @@ const { imageSrc, imgWidth, imgHeight } = sofaDetails;
           </button>
           <button
             onClick={() => handleFloorButton("/dark-floor.png")}
-            className="w-20 px-1.5 bg-white h-14 rounded-md bg-[url(/dark-floor.png)] border border-[#E6EAED] shadow-lg hover:border-[#009688] hover:opacity-90"
+            className="w-14 h-10 md:w-20 md:h-14 px-1.5 bg-white  rounded-md bg-[url(/dark-floor.png)] border border-[#E6EAED] shadow-lg hover:border-[#009688] hover:opacity-90"
           ></button>
           <button
             onClick={() => handleFloorButton("/light-floor.png")}
-            className="w-20 px-1.5 bg-white h-14 rounded-md bg-[url(/light-floor.png)] border border-[#E6EAED] shadow-lg hover:border-[#009688] hover:opacity-90"
+            className="w-14 h-10 md:w-20 md:h-14 px-1.5 bg-white  rounded-md bg-[url(/light-floor.png)] border border-[#E6EAED] shadow-lg hover:border-[#009688] hover:opacity-90"
           ></button>
         </div>
       </div>

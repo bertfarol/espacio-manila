@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Exhibit } from "@/types/exhibit";
 import DateFormat from "../common/DateFormat";
+import { RGBDataUrl } from "../common/RGBDataUrl";
 
 interface UpcomingProps {
   data: Exhibit[];
@@ -17,6 +18,8 @@ const UpcomingExhibitions = ({ data }: UpcomingProps) => {
             className="duration-100 hover:opacity-80"
           >
             <Image
+              placeholder="blur"
+              blurDataURL={RGBDataUrl(243, 242, 242)}
               src={`/${exhibit.image[0].url}`}
               width={exhibit.image[0].width}
               height={exhibit.image[0].height}
